@@ -32,13 +32,14 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
-
+const port = process.env.PORT || 3000;
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.z2fyj.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.z2fyj.mongodb.net/test?authSource=admin&replicaSet=Cluster0-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true`,
+    { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then((result) => {
-    app.listen(3000);
+    app.listen(port);
   })
   .catch((err) => {
     console.log(err);
